@@ -18,8 +18,11 @@
 @mixin component($components: null, $glue: $component-glue) {
 
     $selectors: '[class*="#{$module}#{$glue}"]';
+    $namespace: '';
 
-    $namespace: nth(module-tree(&), length(module-tree(&)));
+    @if length(&) > 1 {
+        $namespace: nth(module-tree(&), length(module-tree(&)));
+    }
 
     @if $components {
 

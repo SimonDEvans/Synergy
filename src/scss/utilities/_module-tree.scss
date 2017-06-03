@@ -9,15 +9,17 @@
     // Remove any modifers
     $selectors: remove-modifiers($selector);
 
-    // Remove any junk characters
-    $selectors: str-replace($selectors, '.', '');
-    $selectors: str-replace($selectors, '[class*="', '');
-    $selectors: str-replace($selectors, '"]', '');
-    $selectors: str-replace($selectors, '#{$modifier-glue}', '');
+    @if type-of($selectors) == 'string' {
+        // Remove any junk characters
+        $selectors: str-replace($selectors, '.', '');
+        $selectors: str-replace($selectors, '[class*="', '');
+        $selectors: str-replace($selectors, '"]', '');
+        $selectors: str-replace($selectors, '#{$modifier-glue}', '');
 
-    // Spoof our modules into a list
-    $selectors: str-replace($selectors, ' ', ', ');
-    $selectors: selector-parse($selectors);
+        // Spoof our modules into a list
+        $selectors: str-replace($selectors, ' ', ', ');
+        $selectors: selector-parse($selectors);
+    }
 
     @return $selectors;
 }
